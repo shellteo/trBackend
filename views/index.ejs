@@ -19,7 +19,7 @@
         }).then(function (body) {
             let parseBody = JSON.parse(body);
             console.log(parseBody.result.address);
-            document.getElementById('location').innerText('根据gps定位：'+parseBody.result.address)
+            document.getElementById('location').innerText = '根据gps定位：'+parseBody.result.address;
         })
 
         let requestUrl2 = '/api/ipLocation'
@@ -29,7 +29,7 @@
             let parseBody = JSON.parse(body);
             console.log(parseBody.result);
             let adInfo = parseBody.result.ad_info;
-            document.getElementById('ipLocation').innerText('根据ip定位：'+adInfo.nation+adInfo.province);
+            document.getElementById('ipLocation').innerText = '根据ip定位：'+adInfo.nation+adInfo.province;
         })
     });
 </script>
