@@ -16,7 +16,7 @@ router.get('/api/ipLocation', function (req, res) {
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress;
     console.log(ip);
-    let requestUrl = 'http://apis.map.qq.com/ws/location/v1/ip?ip='+ip;
+    let requestUrl = 'http://apis.map.qq.com/ws/location/v1/ip?ip=' + ip + '&key=' + key;
     console.log(requestUrl);
     fetch(requestUrl).then(function (response) {
         return response.text()
@@ -25,7 +25,7 @@ router.get('/api/ipLocation', function (req, res) {
     })
 });
 
-router.get('/api/getLocation',function (req, res) {
+router.get('/api/getLocation', function (req, res) {
     //console.log(req.query);
     let location = req.query.location;
     let requestUrl = 'http://apis.map.qq.com/ws/geocoder/v1/?location=' + location + '&key=' + key;
