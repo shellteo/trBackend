@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fetch = require('node-fetch');
 
-
 let key = 'GAPBZ-HSCCO-YMGWE-S32ZJ-URPBH-BRFPY';
 
 /* GET home page. */
