@@ -8,6 +8,19 @@ var app = require('../app');
 var debug = require('debug')('ip:server');
 var http = require('http');
 
+var https = require('https');
+var fs = require("fs");
+
+var options = {
+    key:fs.readFileSync('./cert/214290820350722.key'),
+    cert:fs.readFileSync('./cert/214290820350722.pem')
+};
+
+https.createServer(options, app).listen(3011, function () {
+    console.log('Https server listening on port ' + 3011);
+});
+
+
 /**
  * Get port from environment and store in Express.
  */
