@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+</head>
+<body>
+<h1><%= title %></h1>
+<script>
+    navigator.geolocation.getCurrentPosition((postion) => {
+        let latitude = postion.coords.latitude;
+        let longitude = postion.coords.longitude;
+        let requestUrl = '/api/getLocation?location=' + latitude + ',' + longitude
+        fetch(requestUrl).then(function (response) {
+            console.log(response);
+            return response.text()
+        }).then(function (body) {
+            console.log(JSON.parse(body).result);
+        })
+
+        let requestUrl2 = '/api/ipLocation'
+        fetch(requestUrl2).then(function (response) {
+            return response.text()
+        }).then(function (body) {
+            console.log(body);
+        })
+    });
+</script>
+</body>
 </html>

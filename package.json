@@ -12,6 +12,8 @@
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "node-fetch": "^1.7.3",
+    "serve-favicon": "~2.4.5",
+    "whatwg-fetch": "^2.0.3"
   }
 }

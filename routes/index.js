@@ -1,28 +1,41 @@
 var express = require('express');
 var router = express.Router();
-var os = require('os');
-var ifaces = os.networkInterfaces();
+var fetch = require('node-fetch');
+
+
+let key = 'GAPBZ-HSCCO-YMGWE-S32ZJ-URPBH-BRFPY';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  Object.keys(ifaces).forEach(function (ifname) {
-    var alias = 0;
-    ifaces[ifname].forEach(function (iface) {
-      if ('IPv4' !== iface.family || iface.internal !== false) {
-        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-        return;
-      }
-      if (alias >= 1) {
-        // this single interface has multiple ipv4 addresses
-        console.log(ifname + ':' + alias, iface.address);
-      } else {
-        // this interface has only one ipv4 adress
-        console.log(ifname, iface.address);
-      }
-      ++alias;
-    });
-  });
-  res.render('index', { title: '哈哈哈哈红红火火' });
+router.get('/', function (req, res, next) {
+    res.render('index', {title: '哈哈哈哈红红火火'});
 });
+
+router.get('/api/ipLocation', function (req, res) {
+    let ip = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
+    console.log(ip);
+    let requestUrl = 'http://apis.map.qq.com/ws/location/v1/ip='+ip;
+    fetch(requestUrl).then(function (response) {
+        return response.text()
+    }).then(function (body) {
+        res.send(body);
+    })
+});
+
+router.get('/api/getLocation',function (req, res) {
+    //console.log(req.query);
+    let location = req.query.location;
+    let baseUrl = 'http://apis.map.qq.com/ws/geocoder/v1/';
+    let requestUrl = '?location=' + location + '&key=' + key;
+    fetch(baseUrl+requestUrl).then(function (response) {
+        return response.text()
+    }).then(function (body) {
+        //console.log(body);
+        res.send(body);
+    })
+})
+
 
 module.exports = router;
