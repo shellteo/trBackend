@@ -17,6 +17,7 @@ router.get('/api/ipLocation', function (req, res) {
         req.connection.socket.remoteAddress;
     console.log(ip);
     let requestUrl = 'http://apis.map.qq.com/ws/location/v1/ip='+ip;
+    console.log(requestUrl);
     fetch(requestUrl).then(function (response) {
         return response.text()
     }).then(function (body) {

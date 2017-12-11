@@ -13,7 +13,6 @@
         let longitude = postion.coords.longitude;
         let requestUrl = '/api/getLocation?location=' + latitude + ',' + longitude
         fetch(requestUrl).then(function (response) {
-            console.log(response);
             return response.text()
         }).then(function (body) {
             console.log(JSON.parse(body).result);
