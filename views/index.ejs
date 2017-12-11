@@ -7,6 +7,8 @@
 </head>
 <body>
 <h1><%= title %></h1>
+<h2 id="ipLocation"></h2>
+<h2 id="location"></h2>
 <script>
     navigator.geolocation.getCurrentPosition((postion) => {
         let latitude = postion.coords.latitude;
@@ -15,14 +17,19 @@
         fetch(requestUrl).then(function (response) {
             return response.text()
         }).then(function (body) {
-            console.log(JSON.parse(body).result);
+            let parseBody = JSON.parse(body);
+            console.log(parseBody.result.address);
+            document.getElementById('location').innerText('根据gps定位：'+parseBody.result.address)
         })
 
         let requestUrl2 = '/api/ipLocation'
         fetch(requestUrl2).then(function (response) {
             return response.text()
         }).then(function (body) {
-            console.log(body);
+            let parseBody = JSON.parse(body);
+            console.log(parseBody.result);
+            let adInfo = parseBody.result.ad_info;
+            document.getElementById('ipLocation').innerText('根据ip定位：'+adInfo.nation+adInfo.province);
         })
     });
 </script>
