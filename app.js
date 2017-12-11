@@ -31,7 +31,7 @@ app.get('/ip', function(req, res){
     console.log("ips = " + JSON.stringify(req.ips));// 相当于(req.header('x-forwarded-for') || '').split(',')
     console.log("remoteAddress = " + req.connection.remoteAddress);// 未发生代理时，请求的ip
     console.log("ip = " + req.ip);// 同req.connection.remoteAddress, 但是格式要好一些
-    res.send('Hello World');
+    res.send('你的ip',req.connection.remoteAddress);
 });
 
 // catch 404 and forward to error handler
