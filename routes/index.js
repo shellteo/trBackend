@@ -9,6 +9,10 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: '哈哈哈哈红红火火'});
 });
 
+router.get('/ip', function (req, res, next) {
+    res.render('ip');
+});
+
 router.get('/api/ipLocation', function (req, res) {
     let ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
