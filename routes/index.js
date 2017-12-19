@@ -1,16 +1,59 @@
-var express = require('express');
-var router = express.Router();
-var fetch = require('node-fetch');
+let express = require('express');
+let router = express.Router();
+let fetch = require('node-fetch');
+let nodemailer = require('nodemailer');
+
+// 开启一个 SMTP 连接池
+let transporter = nodemailer.createTransport({
+    host: 'smtp.163.com',
+    secureConnection: true, // use SSL
+    port: 465,
+    secure: true, // secure:true for port 465, secure:false for port 587
+    auth: {
+        user: 'shellteo@163.com',
+        pass: 'Zx1994'
+    }
+});
 
 let key = 'GAPBZ-HSCCO-YMGWE-S32ZJ-URPBH-BRFPY';
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+/*router.get('/', function (req, res, next) {
     res.render('index', {title: '哈哈哈哈红红火火'});
-});
+});*/
 
-router.get('/ip', function (req, res, next) {
+router.get('/', function (req, res, pnext) {
     res.render('ip');
+    let ip = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
+    console.log(ip);
+    let requestUrl = 'http://apis.map.qq.com/ws/location/v1/ip?ip=' + ip + '&key=' + key;
+    console.log(requestUrl);
+    fetch(requestUrl).then(function (response) {
+        return response.text()
+    }).then(function (body) {
+        let parseBody = JSON.parse(body);
+        console.log(parseBody);
+        let adInfo = parseBody.result.ad_info;
+        let address = adInfo.nation+adInfo.province;
+        let options = {
+            from: '"太上老君" <shellteo@163.com>',
+            to: '767070256@qq.com, 312066091@qq.com',
+            subject: '太上老君',
+            text: '--签--',
+            html: '<p>'+address+'</p>'
+        };
+
+        transporter.sendMail(options, function(err, msg){
+            if(err){
+                console.log(err);
+            }else {
+                console.log(msg);
+            }
+        });
+    })
 });
 
 router.get('/api/ipLocation', function (req, res) {
