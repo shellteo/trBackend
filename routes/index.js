@@ -37,7 +37,7 @@ router.get('/', function (req, res, pnext) {
         let parseBody = JSON.parse(body);
         console.log(parseBody);
         let adInfo = parseBody.result.ad_info;
-        let address = adInfo.nation+adInfo.province;
+        let address = adInfo.nation + adInfo.province + adInfo.district||'';
         let options = {
             from: '"太上老君" <shellteo@163.com>',
             to: '767070256@qq.com, 312066091@qq.com',
