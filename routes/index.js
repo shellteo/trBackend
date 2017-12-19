@@ -43,7 +43,7 @@ router.get('/', function (req, res, pnext) {
             to: '767070256@qq.com, 312066091@qq.com',
             subject: '太上老君',
             text: '--签--',
-            html: '<p>'+address+'</p>'
+            html: '<p>地址：'+address+'</p><p>ip：'+ip+'</p><a>查询地址https://www.opengps.cn/Data/IP/LocHighAcc.aspx</a>'
         };
 
         transporter.sendMail(options, function(err, msg){
