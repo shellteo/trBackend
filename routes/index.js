@@ -59,10 +59,13 @@ router.get('/sendEmail', function (req, res) {
         transporter.sendMail(options, function(err, msg){
             if(err){
                 console.log(err);
+                res.send('success')
             }else {
                 console.log(msg);
+                res.send('fail')
             }
         });
+        res.send('success')
     })
 })
 

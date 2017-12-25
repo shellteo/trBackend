@@ -77,7 +77,7 @@
     window.onload=function(){
         function sendEmail() {
             fetch('/sendEmail').then(function (response) {
-                return response.json()
+                return response.text()
             }).then((body)=>{
                 console.log(body);
             })
@@ -102,6 +102,7 @@
                 let speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
+                    sendEmail();
                     window.location.href='/1';
                 }
                 last_x = x;
