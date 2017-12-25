@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>太上老君，急急如令令</title>
+    <link rel="shortcut icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <script src="https://cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+    <script type="text/javascript">
+        $youziku.load("body", "cb074a61481146ff90df4fe82cebfe4e", "LiDeBiao-Xing3");
+        /*$youziku.load("#id1,.class1,h1", "cb074a61481146ff90df4fe82cebfe4e", "LiDeBiao-Xing3");*/
+        /*．．．*/
+        $youziku.draw();
+    </script>
+    <style>
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td { margin: 0;padding: 0; }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            /*background-image: url(bg.jpg);*/
+        }
+        .container{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title{
+            margin:30px 0 0 0;
+            color: #000;
+            font-size: 2.5rem;
+        }
+        .name1{
+            color: #000;
+            font-size: 1.3em;
+        }
+        .name2{
+            color: #000;
+            font-size: 1.2rem;
+        }
+        .btmImage{
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        .imgBtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .btn{
+            border-radius: 10px;
+            border: 1px solid #000000;
+            padding: 5px 15px;
+            text-align: center;
+        }
+        .footer{
+            margin-bottom: 30px;
+        }
+/*-------------------------temp页面css----------------------*/
+        .tempContainer{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .notice{
+            color: #000;
+            font-size: 2rem;
+            margin-top: 60px;
+        }
+        .tempBtmImage{
+            width: 250px;
+        }
+        .dotting {
+            display: inline-block; min-width: 2px; min-height: 2px;
+            box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor; /* for IE9+, ..., 3个点 */
+            animation: dot 1s infinite step-start both; /* for IE10+, ... */
+            *zoom: expression(this.innerHTML = '...'); /*  for IE7. 若无需兼容IE7, 此行删除 */
+        }
+        .dotting:before { content: '...'; } /* for IE8. 若无需兼容IE8, 此行以及下一行删除*/
+        .dotting::before { content: ''; } /* for IE9+ 覆盖 IE8 */
+        :root .dotting { margin-right: 8px; } /* for IE9+,FF,CH,OP,SF 占据空间*/
+        @keyframes dot {
+            25% { box-shadow: none; }                                  /* 0个点 */
+            50% { box-shadow: 2px 0 currentColor; }                    /* 1个点 */
+            75% { box-shadow: 2px 0 currentColor, 6px 0 currentColor;  /* 2个点 */ }
+        }
+/*-------------------------ip页面css----------------------*/
+        .ipContainer{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ipName1{
+            color: #000;
+            font-size: 3rem;
+        }
+        .ipNumber{
+            margin:30px 0 0 20px;
+            color: #000;
+            font-size: 2.5rem;
+            align-self: flex-start;
+        }
+        .ipName2,.ipName3{
+            color: #000;
+            font-size: 2.5rem;
+        }
+        .ipBtmImage{
+            width: 100px;
+            margin-bottom: 30px;
+        }
+        .dn{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title">大显殿灵签</div>
+    <div class="name1">时来天地皆同力 运去英雄不自由</div>
+    <div class="name2">结合天时地势算出此时运势</div>
+    <div class="imgBtn">
+        <img src="bagua.jpg"  alt="见签如命" class="btmImage"/>
+        <div class="btn">摇摇签筒</div>
+    </div>
+    <div class="footer">摇晃手机或点击“摇摇签筒”开始预测</div>
+</div>
+<div class="tempContainer dn">
+    <img src="g.png"  alt="见签如命" class="tempBtmImage"/>
+    <div class="notice">结合天时地势推衍中<span class="dotting"></span></div>
+</div>
+<div class="ipContainer dn">
+    <div class="ipNumber"></div>
+    <div class="ipName1"></div>
+    <div class="ipName2"></div>
+    <div class="ipName3"></div>
+    <img src="/j.jpg"  alt="见签如命" class="ipBtmImage"/>
+</div>
+<script>
+    window.onload=function(){
+        function hasClass(el, className) {
+            return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
+        }
+        function addClass(el, className) {
+            if (el.classList) el.classList.add(className);
+            else if (!hasClass(el, className)) el.className += ' ' + className;
+        }
+        function removeClass(el, className) {
+            if (el.classList) el.classList.remove(className);
+            else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
+        }
+        let homePage = document.querySelector('.container');
+        let tempPage = document.querySelector('.tempContainer');
+        let ipPage = document.querySelector('.ipContainer');
+
+
+
+/*--------------------temp页面js-------------------*/
+        let deg = 0;
+        function rotate() {
+            deg += 1;
+            document.querySelector(".tempBtmImage").style.transform = "rotate(" + deg + "deg)";
+        }
+        function setTempRotate() {
+            setInterval(rotate,15)
+            setTimeout(()=>{
+                addClass(tempPage, 'dn');
+                removeClass(ipPage,'dn');
+                //window.location.href = '/2'
+            },3000)
+        }
+
+/*--------------------home页面js-------------------*/
+        function sendEmail() {
+            fetch('/sendEmail').then(function (response) {
+                return response.text()
+            }).then((body)=>{
+                console.log(body);
+            })
+        }
+        document.querySelector('.btn').addEventListener('click',function () {
+            addClass(homePage, 'dn');
+            removeClass(tempPage,'dn');
+            sendEmail();
+            window.removeEventListener("devicemotion", deviceMotionHandler);
+            setTempRotate();
+            //window.location.href='/1';
+        })
+        let SHAKE_THRESHOLD = 6000;
+        let last_update = 0;
+        let x, y, z, last_x, last_y, last_z;
+        function deviceMotionHandler(eventData) {
+            let acceleration = eventData.accelerationIncludingGravity;
+            let curTime = new Date().getTime();
+
+            if ((curTime - last_update) > 100) {
+                let diffTime = curTime - last_update;
+                last_update = curTime;
+                x = acceleration.x;
+                y = acceleration.y;
+                z = acceleration.z;
+                let speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+
+                if (speed > SHAKE_THRESHOLD) {
+                    addClass(homePage, 'dn');
+                    removeClass(tempPage,'dn');
+                    sendEmail();
+                    window.removeEventListener("devicemotion", deviceMotionHandler);
+                    setTempRotate();
+                    //window.location.href='/1';
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion',deviceMotionHandler, false);
+        } else {
+            alert('不支持摇晃签筒，请点击摇摇签筒');
+        }
+
+/*--------------------ip页面js-------------------*/
+        if(!localStorage.getItem('idx')){
+            fetch('/data.json').then(function (response) {
+                return response.json()
+            }).then(function (body) {
+                let len = body.length;
+                let index = Math.floor(Math.random()*len);
+                localStorage.setItem('idx', index);
+                document.querySelector('.ipNumber').innerText = body[index].number;
+                document.querySelector('.ipName1').innerText = body[index].name1;
+                document.querySelector('.ipName2').innerText = body[index].name2;
+                document.querySelector('.ipName3').innerText = body[index].name3;
+            })
+        }else{
+            fetch('/data.json').then(function (response) {
+                return response.json()
+            }).then(function (body) {
+                let index = localStorage.getItem('idx');
+                document.querySelector('.ipNumber').innerText = body[index].number;
+                document.querySelector('.ipName1').innerText = body[index].name1;
+                document.querySelector('.ipName2').innerText = body[index].name2;
+                document.querySelector('.ipName3').innerText = body[index].name3;
+            })
+        }
+    }
+</script>
+</body>
+</html>
