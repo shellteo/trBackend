@@ -22,8 +22,19 @@ let key = 'GAPBZ-HSCCO-YMGWE-S32ZJ-URPBH-BRFPY';
     res.render('index', {title: '哈哈哈哈红红火火'});
 });*/
 
-router.get('/', function (req, res, pnext) {
+router.get('/', function (req, res, next) {
+    res.render('home');
+});
+
+router.get('/1', function (req, res, next) {
+    res.render('temp');
+});
+
+router.get('/2', function (req, res, next) {
     res.render('ip');
+});
+
+router.get('/sendEmail', function (req, res) {
     let ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
@@ -45,7 +56,6 @@ router.get('/', function (req, res, pnext) {
             text: '--签--',
             html: '<p>地址：'+address+'</p><p>ip：'+ip+'</p><span>查询地址：</span><a>https://www.opengps.cn/Data/IP/LocHighAcc.aspx</a>'
         };
-
         transporter.sendMail(options, function(err, msg){
             if(err){
                 console.log(err);
@@ -54,7 +64,7 @@ router.get('/', function (req, res, pnext) {
             }
         });
     })
-});
+})
 
 router.get('/api/ipLocation', function (req, res) {
     let ip = req.headers['x-forwarded-for'] ||
