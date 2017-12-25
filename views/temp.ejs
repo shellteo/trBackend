@@ -19,7 +19,7 @@
             width: 100%;
             /*background-color: #EEF3F9;*/
         }
-        .container{
+        .tempContainer{
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -31,7 +31,7 @@
             font-size: 2rem;
             margin-top: 60px;
         }
-        .btmImage{
+        .tempBtmImage{
             width: 250px;
         }
         .dotting {
@@ -52,8 +52,8 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <img src="g.png"  alt="见签如命" class="btmImage"/>
+<div class="tempContainer">
+    <img src="g.png"  alt="见签如命" class="tempBtmImage"/>
     <div class="notice">结合天时地势推衍中<span class="dotting"></span></div>
 </div>
 <script>
@@ -61,7 +61,7 @@
         let deg = 0;
         function rotate() {
             deg += 1;
-            document.querySelector(".btmImage").style.transform = "rotate(" + deg + "deg)";
+            document.querySelector(".tempBtmImage").style.transform = "rotate(" + deg + "deg)";
         }
         setInterval(rotate,15)
         setTimeout(()=>{
