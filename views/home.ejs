@@ -5,6 +5,7 @@
     <title>太上老君，急急如令令</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <script src="https://cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
     <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
     <script type="text/javascript">
         //$youziku.load("body", "cb074a61481146ff90df4fe82cebfe4e", "LiDeBiao-Xing3");
@@ -74,8 +75,15 @@
 </div>
 <script>
     window.onload=function(){
+        function sendEmail() {
+            fetch('/sendEmail').then(function (response) {
+                return response.json()
+            }).then((body)=>{
+                console.log(body);
+            })
+        }
         document.querySelector('.btn').addEventListener('click',function () {
-            console.log('123');
+            sendEmail();
             window.location.href='/1';
         })
         let SHAKE_THRESHOLD = 6000;
